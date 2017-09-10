@@ -49,6 +49,7 @@ class DbConnect
         )";
         mysqli_query($db,$query);
     }
+    // get array of product id
     function GetRequestbyid($setid)
     {
         $mysqli = new mysqli(HOST, USERDB, PASSWORDDB, DBNAME);
@@ -69,6 +70,7 @@ class DbConnect
 
         return  $resultarray;
     }
+    // get array of Category or Product type name
     function GetCategoryname($nametable,$getname)
     {
         $mysqli = new mysqli(HOST, USERDB, PASSWORDDB, DBNAME);
@@ -85,6 +87,7 @@ class DbConnect
 
         return  $resultarray;
     }
+    // get array Search from Product
     function Search($search_value)
     {   $mysqli = new mysqli(HOST, USERDB, PASSWORDDB, DBNAME);
         if ($mysqli->connect_errno) {
@@ -105,6 +108,7 @@ class DbConnect
         $mysqli->close();
         return  $resultarray;
     }
+    // set new category of Product name
     function Setcategory($nametable,$getname)
     {
         $db=mysqli_connect(HOST,USERDB,PASSWORDDB,DBNAME);
@@ -112,16 +116,19 @@ class DbConnect
         mysqli_query( $db,$query);
         return (mysqli_insert_id($db));
     }
+    // update product value
     function Updatevalue($product_type_id,$category_id,$name,$description,$image,$id)
     {   $db=mysqli_connect(HOST,USERDB,PASSWORDDB,DBNAME);
         $query= "UPDATE  `Product` SET `product_type_id`='$product_type_id',`category_id`='$category_id',`name`='$name',`description`='$description',`image`='$image' WHERE `Product`.`id` = '$id'";
         mysqli_query( $db,$query);
     }
+    // Set Product value
     function Setvalue($product_type_id,$category_id,$name,$description,$image)
     {   $db=mysqli_connect(HOST,USERDB,PASSWORDDB,DBNAME);
         $query="INSERT INTO `Product` (`id`, `product_type_id`, `category_id`, `name`, `description`, `image`) VALUES (NULL, '$product_type_id', '$category_id', '$name', '$description', '$image');";
         mysqli_query( $db,$query);
     }
+    // Get table convert to array
     function getAllCutomType($tablename){
         $mysqli = new mysqli(HOST, USERDB, PASSWORDDB, DBNAME);
         if ($mysqli->connect_errno) {
